@@ -9,47 +9,75 @@
         background: #000;
         color: #fc0;
         text-align: center;
-        line-height: 1.3;
       }
-      div{
-        display: inline-block;
+      table{
+        margin-left:auto;
+        margin-right:auto;
       }
-      div.left{
+      .l{
         text-align: right;
       }
-      div.right{
+      .r{
         text-align: left;
+      }
+      input[type=text],button,select{
+        width: 100px;
+        border: #fc0 1px solid;
+        border-radius: 8px;
+        background: #000;
+        margin: 1px;
+        color: #fc0;
+      }
+      input[type=text][disabled]{
+        border: #f80 1px solid;
+        color: #f80;
+      }
+      input{
+        padding-left: 5px;
       }
     </style>
   </head>
   <body>
     <h1>Kalkulator ceny i mocy premixu</h1>
-    <div class="left">
-      Cena (0.00):<br>
-      Pojemnosc premixu (0):<br>
-      Ilosc shotow (0):<br>
-      Moc shotow (Wybierz):<br>
-      Calkowita ilosc (ml):<br>
-      Calkowita moc (mg):<br>
-      Cena/1L:<br>
-      Cena/Butelka:<br>
-    </div>
-    <div class="right">
-      <input type="text" id="Cena"/><br>
-      <input type="text" id="mlpremix"/><br>
-      <input type="text" id="iloscshotow"/><br>
-      <select id="mocshotow">
-        <option id="3">3mg</option>
-        <option id="6">6mg</option>
-        <option id="12">12mg</option>
-        <option id="18">18mg</option>
-      </select><br>
-      <input type="text" id="mltotal" disabled><br>
-      <input type="text" id="mgtotal" disabled><br>
-      <input type="text" id="cena1l" disabled><br>
-      <input type="text" id="cenapremix" disabled><br>
-    </div>
-    <br>
+    <table>
+      <tr>
+        <td id="l">Cena (0.00):</td>
+        <td id="r"><input type="text" id="Cena"/></td>
+      </tr>
+      <tr>
+        <td id="l">Pojemnosc premixu (0):</td>
+        <td id="r"><input type="text" id="mlpremix"/></td>
+      </tr>
+      <tr>
+        <td id="l">Ilosc shotow (0):</td>
+        <td id="r"><input type="text" id="iloscshotow"/></td>
+      </tr>
+      <tr>
+        <td id="l">Moc shotow (Wybierz):</td>
+        <td id="r"><select id="mocshotow">
+          <option id="3">3mg</option>
+          <option id="6">6mg</option>
+          <option id="12">12mg</option>
+          <option id="18">18mg</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td id="l">Calkowita ilosc (ml):</td>
+        <td id="r"><input type="text" id="mltotal" disabled></td>
+      </tr>
+      <tr>
+        <td id="l">Calkowita moc (mg):</td>
+        <td id="r"><input type="text" id="mgtotal" disabled></td>
+      </tr>
+      <tr>
+        <td id="l">Cena/1L:</td>
+        <td id="r"><input type="text" id="cena1l" disabled></td>
+      </tr>
+      <tr>
+        <td id="l">Cena/Butelka:</td>
+        <td id="r"><input type="text" id="cenapremix" disabled></td>
+      </tr>
+    </table>
     <button onClick="calc()">Oblicz</button>
     <script>
       function calc()
@@ -81,7 +109,7 @@
         }
         cena = cena + cenashota * iloscshotow;
         var cenalitr = cena * tempcalc;
-        document.getElementById("cenapremix").value = cena;
+        document.getElementById("cenapremix").value = cena.toFixed(2);
         document.getElementById("mltotal").value = iloscpremixu;
         document.getElementById("cena1l").value = cenalitr.toFixed(2);
         var calkowitamoc = ((iloscshotow * 10) * tempmoc) / ( mlpremix + (iloscshotow * 10) );
